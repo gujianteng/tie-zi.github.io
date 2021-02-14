@@ -6,13 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "docs":"apidoc -i ./routers -o ./public/docs"
+    "docs": "apidoc -i ./routers -o ./public/docs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "mongoose": "^5.11.16"
   }
 }
