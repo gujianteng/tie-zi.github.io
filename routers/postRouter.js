@@ -12,16 +12,17 @@ const {
     remove
  } = require('../controllers/postController')
 // 定义帖子相关的路由
-// GET   /posts
+
+// 查询帖子 GET   /posts
 router.get("/",index)
 
-//  POST  /posts
+//创建帖子  POST  /posts
 router.post('/',create)
-//  PUT   /posts/:id
+//更新帖子  PUT   /posts/:id
 router.put('/:id',update)
 
 
-//  DELETE   /posts/:id
+//删除帖子  DELETE   /posts/:id
 router.delete('/:id',remove)
 
 module.exports=router

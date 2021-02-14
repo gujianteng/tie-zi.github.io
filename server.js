@@ -3,8 +3,11 @@ var express=require('express')
 var  postRouter =require('./routers/postRouter')
 var app=express()
 
-// 使用use方法调用路由文件，并设置好前缀
 
+//  req.body 中间件处理
+app.use(express.json())
+app.use(express.urlencoded({ extended:true }))
+// 使用use方法调用路由文件，并设置好前缀
 app.use('/posts',postRouter)
 
 
