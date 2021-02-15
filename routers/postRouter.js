@@ -22,8 +22,9 @@ const {
  * @api {get} http://localhost:3001/posts     获取帖子列表，查询帖子
  * @apiName index
  * @apiGroup post
- * @apiParam  (query) {String} pageNum=1  页码
- * @apiParam  (query) {String} pageSize=2  每页显示条数
+ * @apiParam  (query) {String} pageNum=1  页码<可选> 
+ * @apiParam  (query) {String} pageSize=2  每页显示条数<可选>
+ * @apiParam  (query) {String} title  搜索关键字<可选>
  * 
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.

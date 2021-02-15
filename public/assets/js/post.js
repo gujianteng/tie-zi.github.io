@@ -3,12 +3,13 @@ $(function () {
     var pageNum = 1   //代表当前页
     var pageSize = 3  //每页显示条数
     var totalPage = 1  //总的页数
-
+    var searchTitle='' // 标题搜索关键字
 
     function getDate() {
         $.get('http://localhost:3001/posts', {
             pageNum: pageNum,
-            pageSize: pageSize
+            pageSize: pageSize,
+            title:searchTitle
         }, function (res) {
             if (res.code === 0) {
                 var html = ''
@@ -53,5 +54,18 @@ $(function () {
         pageNum = toPage 
         getDate()
     }) 
+
+    // 模糊搜索
+    $('#searchBtn').click(function(){
+        // 获取关键字
+        var value =$('.searchInput').val()
+
+        // 将 value 赋值给 searchTitle
+        searchTitle=value
+        // 发送ajax请求拿内容
+        
+        pageNum=1   //重置页数，不然选择第二页搜索没内容
+        getDate()
+    })
 
 })

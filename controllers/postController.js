@@ -11,29 +11,30 @@ var PostModel = require("../models/postModel")
 
 // 查询帖子，获取帖子列表
 exports.index = async (req, res) => {
-//  获取前端传递过来的分页的数据 pageSize ,pageNum,query
-var pageNum=parseInt(req.query.pageNum) || 1     //页码
-var pageSize=parseInt(req.query.pageSize) || 2   //每页显示条数
-// 操作数据库分页公式：Model.find().skip((pageNum - 1) * pageSize ).limit( pageSize )
-var date =await PostModel.find().skip((pageNum-1)*pageSize).limit(pageSize)
+    //  获取前端传递过来的分页的数据 pageSize ,pageNum,query
+    var pageNum = parseInt(req.query.pageNum) || 1     //页码
+    var pageSize = parseInt(req.query.pageSize) || 2   //每页显示条数
+    // 获取前端传递过来的搜索数据 
+    var title =req.query.title 
+    // 操作数据库分页公式：Model.find().skip((pageNum - 1) * pageSize ).limit( pageSize )
+    var date = await PostModel.find({ title: new RegExp(title) }).skip((pageNum - 1) * pageSize).limit(pageSize)
 
+    //前端还需要知道一共有多少页，需要后台告诉他
+    // totalPage=Math.ceil(总条数/每页显示条数)=Math.ceil(总条数/pageSize) 
+    // 先算出总条数 tatal  
+    var total = await PostModel.find({title: new RegExp(title)}).countDocuments()
+    // 再计算出totalPage,也就是总页数
+    var totalPage = Math.ceil(total / pageSize)
 
-//前端还需要知道一共有多少页，需要后台告诉他
-// totalPage=Math.ceil(总条数/每页显示条数)=Math.ceil(总条数/pageSize) 
-// 先算出总条数 tatal
-var total=await PostModel.find().countDocuments()
-// 再计算出totalPage,也就是总页数
-var totalPage=Math.ceil(total/pageSize)
-
-// 响应
-res.send({
-    code:0,
-    msg:"ok",
-    date:{
-        list:date,
-        totalPage:totalPage
-    }
-})
+    // 响应
+    res.send({
+        code: 0,
+        msg: "ok",
+        date: {
+            list: date,
+            totalPage: totalPage
+        }
+    })
 }
 
 

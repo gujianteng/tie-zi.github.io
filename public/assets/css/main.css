@@ -14,3 +14,9 @@
 .navbar-dark{
   position: relative;
 }
+.search{
+  font-size: 20px;
+}
+.search input{
+  width: 120px;
+}
