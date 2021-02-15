@@ -1,0 +1,8 @@
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-toggle::after {
+  vertical-align: middle;
+}
