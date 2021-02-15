@@ -5,6 +5,10 @@ var express =require('express')
 var router=express.Router()
 // 引入controllers 文件，结构赋值的方式拿出里面的方法
 
+
+
+
+
 const { 
     index,
     create,
@@ -14,15 +18,18 @@ const {
 // 定义帖子相关的路由
 
 
-
-
 /**
- * @api {get} http://localhost:3000/posts     获取帖子列表，查询帖子
+ * @api {get} http://localhost:3001/posts     获取帖子列表，查询帖子
  * @apiName index
  * @apiGroup post
+ * @apiParam  (query) {String} pageNum=1  页码
+ * @apiParam  (query) {String} pageSize=2  每页显示条数
+ * 
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.
- * @apiSuccess {Array}  data  帖子数组.
+ * @apiSuccess {Object}  data  数据.
+ * @apiSuccess {Array}  data[list]  帖子数组.
+ * @apiSuccess {Number}  data[totalPage]  总页数.
  */
 // 查询帖子 GET   /posts
 router.get("/",index)
@@ -30,14 +37,12 @@ router.get("/",index)
 
 
 /**
- * @api {post} http://localhost:3000/posts     创建帖子
+ * @api {post} http://localhost:3001/posts     创建帖子
  * @apiName create
  * @apiGroup post
  * 
  * @apiParam {String} title  帖子标题
  * @apiParam {String} content  帖子内容
- * 
- * 
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.
  */
@@ -46,7 +51,7 @@ router.post('/',create)
 
 
 /**
- * @api {put} http://localhost:3000/posts/:id     更新帖子
+ * @api {put} http://localhost:3001/posts/:id     更新帖子
  * @apiName update
  * @apiGroup post
  * 
@@ -61,7 +66,7 @@ router.put('/:id',update)
 
 
 /**
- * @api {delete} http://localhost:3000/posts/:id     删除帖子
+ * @api {delete} http://localhost:3001/posts/:id     删除帖子
  * @apiName remove
  * @apiGroup post
  * @apiSuccess {Number} code 错误/成功 状态码.

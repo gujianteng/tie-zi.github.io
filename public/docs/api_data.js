@@ -1,7 +1,7 @@
 define({ "api": [
   {
     "type": "post",
-    "url": "http://localhost:3000/posts",
+    "url": "http://localhost:3001/posts",
     "title": "创建帖子",
     "name": "create",
     "group": "post",
@@ -51,10 +51,32 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "http://localhost:3000/posts",
+    "url": "http://localhost:3001/posts",
     "title": "获取帖子列表，查询帖子",
     "name": "index",
     "group": "post",
+    "parameter": {
+      "fields": {
+        "query": [
+          {
+            "group": "query",
+            "type": "String",
+            "optional": false,
+            "field": "pageNum",
+            "defaultValue": "1",
+            "description": "<p>页码</p>"
+          },
+          {
+            "group": "query",
+            "type": "String",
+            "optional": false,
+            "field": "pageSize",
+            "defaultValue": "2",
+            "description": "<p>每页显示条数</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -74,10 +96,24 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "Array",
+            "type": "Object",
             "optional": false,
             "field": "data",
+            "description": "<p>数据.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data[list]",
             "description": "<p>帖子数组.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data[totalPage]",
+            "description": "<p>总页数.</p>"
           }
         ]
       }
@@ -88,7 +124,7 @@ define({ "api": [
   },
   {
     "type": "delete",
-    "url": "http://localhost:3000/posts/:id",
+    "url": "http://localhost:3001/posts/:id",
     "title": "删除帖子",
     "name": "remove",
     "group": "post",
@@ -118,7 +154,7 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "http://localhost:3000/posts/:id",
+    "url": "http://localhost:3001/posts/:id",
     "title": "更新帖子",
     "name": "update",
     "group": "post",
