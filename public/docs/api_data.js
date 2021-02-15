@@ -26,7 +26,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "data",
-            "description": "<p>帖子id.</p>"
+            "description": "<p>帖子详情（数据库单条数据）.</p>"
           }
         ]
       }
@@ -39,7 +39,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "http://localhost:3001/posts",
-    "title": "创建帖子",
+    "title": "发布帖子",
     "name": "create",
     "group": "post",
     "parameter": {
@@ -89,7 +89,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "http://localhost:3001/posts",
-    "title": "获取帖子列表，查询帖子",
+    "title": "查询帖子(帖子列表)",
     "name": "index",
     "group": "post",
     "parameter": {
@@ -199,7 +199,7 @@ define({ "api": [
   {
     "type": "put",
     "url": "http://localhost:3001/posts/:id",
-    "title": "更新帖子",
+    "title": "编辑帖子",
     "name": "update",
     "group": "post",
     "parameter": {

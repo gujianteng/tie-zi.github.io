@@ -26,8 +26,6 @@ $(function () {
     $.get(url,function(res){
         // console.log(res);
         if(res.code===0){
-
-
             var date=res.date
             var html=`
             <h1 class="mb-5 font-weight-light">${date.title}</h1>
@@ -35,10 +33,10 @@ $(function () {
             <div class="border-top py-4 mt-4">
               <ul class="nav justify-content-end">
                 <li class="nav-item">
-                  <a href="./edit.html" class="nav-link btn btn-link">Edit</a>
+                  <a href="./edit.html?id=${res._id}" class="nav-link btn btn-link">帖子编辑</a>
                 </li>
                 <li class="nav-item">
-                  <a href="javascript:;" class="nav-link btn btn-link">Delete</a>
+                  <a href="javascript:;" class="nav-link btn btn-link">帖子删除</a>
                 </li>
               </ul>
             </div>`

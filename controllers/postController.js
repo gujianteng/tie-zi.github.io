@@ -38,7 +38,7 @@ exports.index = async (req, res) => {
 }
 
 
-// 创建帖子
+// 发布帖子
 exports.create = async (req, res) => {
     //  获取前端传递过来的参数
     var { title, content } = req.body
@@ -50,7 +50,7 @@ exports.create = async (req, res) => {
 }
 
 
-// 更新帖子
+// 编辑帖子
 exports.update = async (req, res) => {
     // 要更新的帖子的id,前端传过来动态的id
     var { id } = req.params
@@ -72,7 +72,7 @@ exports.remove = async (req, res) => {
     // 使用数计库的 Model.deleteOne方法操作
     await PostModel.deleteOne({ _id: id })
     // 成功
-    res.send({ code: 0, msg: "成功", })
+    res.send({ code: 0, msg: "成功"})
 }
 
 // 帖子详情
@@ -83,5 +83,5 @@ exports.show= async (req, res) => {
     // 使用数计库的 Model.deleteOne方法操作
     var date =await PostModel.findOne({ _id: id })
     // 成功
-    res.send({ code: 0, msg: "成功",date:date })
+    res.send({ code: 0, msg: "成功",date })
 }

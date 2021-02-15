@@ -20,7 +20,7 @@ const {
 
 
 /**
- * @api {get} http://localhost:3001/posts     获取帖子列表，查询帖子
+ * @api {get} http://localhost:3001/posts     查询帖子(帖子列表)
  * @apiName index
  * @apiGroup post
  * @apiParam  (query) {String} pageNum=1  页码<可选> 
@@ -39,7 +39,7 @@ router.get("/",index)
 
 
 /**
- * @api {post} http://localhost:3001/posts     创建帖子
+ * @api {post} http://localhost:3001/posts     发布帖子
  * @apiName create
  * @apiGroup post
  * 
@@ -48,21 +48,21 @@ router.get("/",index)
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.
  */
-//创建帖子  POST  /posts
+//发布帖子  POST  /posts
 router.post('/',create)
 
 
 /**
- * @api {put} http://localhost:3001/posts/:id     更新帖子
+ * @api {put} http://localhost:3001/posts/:id     编辑帖子
  * @apiName update
  * @apiGroup post
- * 
  * @apiParam {String} title  帖子标题
  * @apiParam {String} content  帖子内容
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.
+ * 
  */
-//更新帖子  PUT   /posts/:id
+//编辑帖子  PUT   /posts/:id
 router.put('/:id',update)
 
 
@@ -77,15 +77,16 @@ router.put('/:id',update)
 //删除帖子  DELETE   /posts/:id
 router.delete('/:id',remove)
 
+
 /**
  * @api {get} http://localhost:3001/posts/:id     帖子详情
  * @apiGroup post
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.
- * @apiSuccess {String} data  帖子id.
+ * @apiSuccess {String} data  帖子详情（数据库单条数据）.
  * 
  */
-//删除帖子  DELETE   /posts/:id
+//帖子详情  get   /posts/:id
 router.get('/:id',show)
 
 module.exports=router
