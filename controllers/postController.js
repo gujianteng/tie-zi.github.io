@@ -74,3 +74,14 @@ exports.remove = async (req, res) => {
     // 成功
     res.send({ code: 0, msg: "成功", })
 }
+
+// 帖子详情
+exports.show= async (req, res) => {
+
+    // 获取id
+    var { id } = req.params
+    // 使用数计库的 Model.deleteOne方法操作
+    var date =await PostModel.findOne({ _id: id })
+    // 成功
+    res.send({ code: 0, msg: "成功",date:date })
+}

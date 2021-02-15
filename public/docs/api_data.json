@@ -1,5 +1,42 @@
 [
   {
+    "type": "get",
+    "url": "http://localhost:3001/posts/:id",
+    "title": "帖子详情",
+    "group": "post",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "code",
+            "description": "<p>错误/成功 状态码.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>错误/成功 信息.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>帖子id.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routers/postRouter.js",
+    "groupTitle": "post",
+    "name": "GetHttpLocalhost3001PostsId"
+  },
+  {
     "type": "post",
     "url": "http://localhost:3001/posts",
     "title": "创建帖子",

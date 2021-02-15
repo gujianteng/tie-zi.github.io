@@ -13,7 +13,8 @@ const {
     index,
     create,
     update,
-    remove
+    remove,
+    show
  } = require('../controllers/postController')
 // 定义帖子相关的路由
 
@@ -75,5 +76,16 @@ router.put('/:id',update)
  */
 //删除帖子  DELETE   /posts/:id
 router.delete('/:id',remove)
+
+/**
+ * @api {get} http://localhost:3001/posts/:id     帖子详情
+ * @apiGroup post
+ * @apiSuccess {Number} code 错误/成功 状态码.
+ * @apiSuccess {String} msg   错误/成功 信息.
+ * @apiSuccess {String} data  帖子id.
+ * 
+ */
+//删除帖子  DELETE   /posts/:id
+router.get('/:id',show)
 
 module.exports=router
