@@ -50,7 +50,7 @@ exports.create = async (req, res) => {
 }
 
 
-// 编辑帖子
+// 编辑更新帖子
 exports.update = async (req, res) => {
     // 要更新的帖子的id,前端传过来动态的id
     var { id } = req.params
@@ -75,7 +75,7 @@ exports.remove = async (req, res) => {
     res.send({ code: 0, msg: "成功"})
 }
 
-// 帖子详情
+// 帖子详情/编辑回填数据
 exports.show= async (req, res) => {
 
     // 获取id
@@ -84,4 +84,4 @@ exports.show= async (req, res) => {
     var date =await PostModel.findOne({ _id: id })
     // 成功
     res.send({ code: 0, msg: "成功",date })
-}
+}  

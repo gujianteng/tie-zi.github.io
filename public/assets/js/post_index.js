@@ -1,3 +1,5 @@
+//  帖子查询和搜索功能
+
 $(function () {
 
     var pageNum = 1   //代表当前页

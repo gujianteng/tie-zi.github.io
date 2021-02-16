@@ -2,7 +2,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "http://localhost:3001/posts/:id",
-    "title": "帖子详情",
+    "title": "帖子详情/编辑回填数据",
     "group": "post",
     "success": {
       "fields": {
@@ -89,7 +89,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "http://localhost:3001/posts",
-    "title": "查询帖子(帖子列表)",
+    "title": "查询帖子与搜索",
     "name": "index",
     "group": "post",
     "parameter": {
@@ -199,7 +199,7 @@ define({ "api": [
   {
     "type": "put",
     "url": "http://localhost:3001/posts/:id",
-    "title": "编辑帖子",
+    "title": "编辑更新帖子",
     "name": "update",
     "group": "post",
     "parameter": {
@@ -238,6 +238,13 @@ define({ "api": [
             "optional": false,
             "field": "msg",
             "description": "<p>错误/成功 信息.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>更新之后的帖子信息.</p>"
           }
         ]
       }

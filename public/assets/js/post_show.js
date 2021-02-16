@@ -28,15 +28,16 @@ $(function () {
         if(res.code===0){
             var date=res.date
             var html=`
+            <h1 class="mb-5">帖子详情</h1>
             <h1 class="mb-5 font-weight-light">${date.title}</h1>
             <div class="py-4">${date.content}</div>
             <div class="border-top py-4 mt-4">
               <ul class="nav justify-content-end">
                 <li class="nav-item">
-                  <a href="./edit.html?id=${res._id}" class="nav-link btn btn-link">帖子编辑</a>
+                  <a href="./edit.html?id=${date._id}" class="nav-link btn btn-link">帖子编辑</a>
                 </li>
                 <li class="nav-item">
-                  <a href="javascript:;" class="nav-link btn btn-link">帖子删除</a>
+                  <a href="javascript:;" class="nav-link btn btn-link" id="post-remove">帖子删除</a>
                 </li>
               </ul>
             </div>`

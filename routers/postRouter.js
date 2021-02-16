@@ -20,7 +20,7 @@ const {
 
 
 /**
- * @api {get} http://localhost:3001/posts     查询帖子(帖子列表)
+ * @api {get} http://localhost:3001/posts     查询帖子与搜索
  * @apiName index
  * @apiGroup post
  * @apiParam  (query) {String} pageNum=1  页码<可选> 
@@ -53,16 +53,18 @@ router.post('/',create)
 
 
 /**
- * @api {put} http://localhost:3001/posts/:id     编辑帖子
+ * @api {put} http://localhost:3001/posts/:id     编辑更新帖子
  * @apiName update
  * @apiGroup post
  * @apiParam {String} title  帖子标题
  * @apiParam {String} content  帖子内容
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.
+ * @apiSuccess {String} data  更新之后的帖子信息.
+ * 
  * 
  */
-//编辑帖子  PUT   /posts/:id
+//更新帖子  PUT   /posts/:id
 router.put('/:id',update)
 
 
@@ -79,7 +81,7 @@ router.delete('/:id',remove)
 
 
 /**
- * @api {get} http://localhost:3001/posts/:id     帖子详情
+ * @api {get} http://localhost:3001/posts/:id     帖子详情/编辑回填数据
  * @apiGroup post
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.
