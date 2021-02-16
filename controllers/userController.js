@@ -4,6 +4,8 @@
 // // var bcryptjs=require('bcryptjs')
 
 const UserModel = require("../models/userModel")
+//使用token先要引入jsonwebtoken
+var jsonwebtoken=require('jsonwebtoken')
 
 // exports.register= async(req,res)=>{
 //     // 要获取前端传递过来的用户信息 body
@@ -52,7 +54,7 @@ exports.login= async(req,res)=>{
     var date=await UserModel.findOne({email})
     // 判断 date是否有值
     if(!date){
-        res.send({code:-1,msg:'用户邮箱已经注册过了'})
+        res.send({code:-1,msg:'邮箱不正确'})
         return
     }
 
@@ -63,7 +65,20 @@ exports.login= async(req,res)=>{
         return
     }
 
-    res.send({code:0,msg:'登入成功'})
+
+    //登入之前生成一个token给前端
+
+    var token=jsonwebtoken.sign(
+        {
+            userId:date._id,
+            nickname:date.nickname
+        },
+        "gujianteng",     //定义一个密钥
+        {
+            expiresIn:'2h'    //设置过期时间
+        }
+    )
+    res.send({code:0,msg:'登入成功',token})
 
 
 } 

@@ -25,6 +25,7 @@ router.post('/register',register)
  * @apiParam  (body) {String} password 用户密码
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.
+ * @apiSuccess {String} token   token.
  */
 router.post('/login',login)
 

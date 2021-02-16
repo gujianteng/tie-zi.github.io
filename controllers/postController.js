@@ -8,21 +8,22 @@
 
 //  引入数计库模型
 var PostModel = require("../models/postModel")
-
+// 引入jsonwebtoken ,y验证token正确不正确
+var jsonwebtoken = require('jsonwebtoken')
 // 查询帖子，获取帖子列表
 exports.index = async (req, res) => {
     //  获取前端传递过来的分页的数据 pageSize ,pageNum,query
     var pageNum = parseInt(req.query.pageNum) || 1     //页码
     var pageSize = parseInt(req.query.pageSize) || 2   //每页显示条数
     // 获取前端传递过来的搜索数据 
-    var title =req.query.title 
+    var title = req.query.title
     // 操作数据库分页公式：Model.find().skip((pageNum - 1) * pageSize ).limit( pageSize )
     var date = await PostModel.find({ title: new RegExp(title) }).skip((pageNum - 1) * pageSize).limit(pageSize)
 
     //前端还需要知道一共有多少页，需要后台告诉他
     // totalPage=Math.ceil(总条数/每页显示条数)=Math.ceil(总条数/pageSize) 
     // 先算出总条数 tatal  
-    var total = await PostModel.find({title: new RegExp(title)}).countDocuments()
+    var total = await PostModel.find({ title: new RegExp(title) }).countDocuments()
     // 再计算出totalPage,也就是总页数
     var totalPage = Math.ceil(total / pageSize)
 
@@ -40,15 +41,33 @@ exports.index = async (req, res) => {
 
 // 发布帖子
 exports.create = async (req, res) => {
-    //  获取前端传递过来的参数
-    var { title, content } = req.body
-    //  使用 async await  创建帖子
-    await PostModel.create({ title, content })
-    // 成功
-    res.send({ code: 0, msg: "成功" })
+    //获取请求头中的token
+    var token = req.get('Authorization')  //一般存在请求头的Authorization里面
+    // 发布帖子之前校验一下token是否有效
+    if (token) {
+        // 存在还要去校验token是否有效
+        jsonwebtoken.verify(token, "gujianteng", async (err, date) => {
+            if (err) {
+                //校验失败
+                res.status(401).send('身份验证失败')
+            } else {
+                // 校验成功，再去做你后续的操作
+
+                //  获取前端传递过来的参数
+                var { title, content } = req.body
+                //  使用 async await  创建帖子
+                await PostModel.create({ title, content })
+                // 成功
+                res.send({ code: 0, msg: "成功" })
+            }
+        })
+    } else {
+        // 不存在
+        res.status(401).send('请携带token')
+    }
+
 
 }
-
 
 // 编辑更新帖子
 exports.update = async (req, res) => {
@@ -62,8 +81,6 @@ exports.update = async (req, res) => {
     // 成功
     res.send({ code: 0, msg: "成功" })
 }
-
-
 // 删除帖子
 exports.remove = async (req, res) => {
 
@@ -72,16 +89,16 @@ exports.remove = async (req, res) => {
     // 使用数计库的 Model.deleteOne方法操作
     await PostModel.deleteOne({ _id: id })
     // 成功
-    res.send({ code: 0, msg: "成功"})
+    res.send({ code: 0, msg: "成功" })
 }
 
 // 帖子详情/编辑回填数据
-exports.show= async (req, res) => {
+exports.show = async (req, res) => {
 
     // 获取id
     var { id } = req.params
     // 使用数计库的 Model.deleteOne方法操作
-    var date =await PostModel.findOne({ _id: id })
+    var date = await PostModel.findOne({ _id: id })
     // 成功
-    res.send({ code: 0, msg: "成功",date })
+    res.send({ code: 0, msg: "成功", date })
 }  
