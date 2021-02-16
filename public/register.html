@@ -16,24 +16,25 @@
 
     <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
 
-    <label for="inputEmail" class="sr-only">用户名</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="用户名" required="" autofocus="" /> 
+    <label for="inputEmail" class="sr-only">用户昵称</label>
+    <input  id="inputEmail register-name" class="form-control" placeholder="用户昵称" required="" autofocus="" /> 
 
-    <label for="inputEmail" class="sr-only">Email</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="" autofocus="" />
+    <label class="sr-only">Email</label>
+    <input type="email" id="register-username" class="form-control" placeholder="Email" />
 
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
+    <input  id="register-password" class="form-control" placeholder="Password"/>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">
+    <button id="user-register" class="btn btn-lg btn-primary btn-block" type="submit">
       注册
     </button> 
 
     <p class="mt-5 mb-3 text-muted">© 2019-2020</p>
   </form>
 
-  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="/assets/js/user_register.js"></script>
 </body>
 
 </html>

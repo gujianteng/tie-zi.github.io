@@ -36,7 +36,7 @@ exports.register=async (req,res)=>{
     var date=await UserModel.findOne({email})
     if(date){
         // 存在，不允许注册
-        res.send({code:-1,msg:'用户已经注册过了'})
+        res.send({code:-1,msg:'该邮箱已注册'})
     }else{
         //不存在，允许注册
         await UserModel.create(req.body)
