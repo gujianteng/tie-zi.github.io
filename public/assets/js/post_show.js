@@ -29,7 +29,7 @@ $(function () {
             var date=res.date
             var html=`
             <h1 class="mb-5">帖子详情</h1>
-            <h1 class="mb-5 font-weight-light">${date.title}</h1>
+            <h1 class="mb-5 font-weight-light">${date.title}<p style="float:right;font-size:25px">${moment(res.date.updatedAt).format("YYYY-MM-DD hh:mm:ss")}</p></h1>
             <div class="py-4">${date.content}</div>
             <div class="border-top py-4 mt-4">
               <ul class="nav justify-content-end">
