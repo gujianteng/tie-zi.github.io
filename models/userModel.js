@@ -60,6 +60,17 @@ userSchema.pre('save',function(next){
 }) 
 
 
+/**
+ * 校验密码
+ * 在userSchema.methods的原型上加一个方法comparePassword，让UserModel.findOne()的实例date去调用
+ * UserModel.findOne()的实例date调用时可以拿到comparePassword方法里面的值
+ */ 
+userSchema.methods.comparePassword=function(password){
+    // this就是数据库中的数据，里面的密码就是加密过的密码
+    //bcryptjs.compareSync是bcryptjs校验密码的一种方法，返回一个布尔值
+    return bcryptjs.compareSync(password,this.password)
+}
+
 
 var UserModel = mongoose.model('user', userSchema)
 

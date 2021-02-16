@@ -44,6 +44,26 @@ exports.register=async (req,res)=>{
     }
 }
 
-exports.login= (req,res)=>{
-    res.send('用户登入')
+exports.login= async(req,res)=>{
+    // res.send('用户登入')
+    //获取前端传递过来的email  与password
+    var {email,password}=req.body
+    // 根据Email 去查询数据库
+    var date=await UserModel.findOne({email})
+    // 判断 date是否有值
+    if(!date){
+        res.send({code:-1,msg:'用户邮箱已经注册过了'})
+        return
+    }
+
+    // 校验密码是否正确 bcryptjs
+    if(!date.comparePassword(password)){
+        // 校验不通过
+        res.send({code:-1,msg:'密码不正确'})
+        return
+    }
+
+    res.send({code:0,msg:'登入成功'})
+
+
 } 
