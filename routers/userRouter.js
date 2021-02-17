@@ -60,4 +60,20 @@ router.get("/getInfo", auth, userController.getInfo);
  */
 router.put("/users/update",auth,upload.single("avatar"),userController.update);
 
+
+/**
+ * @api {get} http://localhost:3001/updatePassword 修改当前登录用户的密码
+ * @apiGroup 用户
+ *
+ * @apiParam (Headers) {String} Authorization token信息
+ * @apiParam (body) {String} password
+ * @apiParam (body) {String} newpassword
+ * 
+ * 
+ * @apiSuccess {Number} code 错误状态码.
+ * @apiSuccess {String} msg  错误消息.
+ * @apiSuccess {Object} data 当前用户基本信息
+ */
+router.post("/updatePassword", auth, userController.updatePassword);
+
 module.exports = router      

@@ -2,8 +2,12 @@
 const UserModel = require("../models/userModel")
 const fs = require("fs");
 const path = require("path");
+var bcryptjs=require('bcryptjs')
+
 //使用token先要引入jsonwebtoken
 var jsonwebtoken = require('jsonwebtoken')
+
+// 用户注册
 exports.register = async (req, res) => {
     // 获取email
     var { email } = req.body
@@ -18,7 +22,7 @@ exports.register = async (req, res) => {
         res.send({ code: 0, msg: '注册成功' })
     }
 }
-
+//用户登入
 exports.login = async (req, res) => {
     // res.send('用户登入')
     //获取前端传递过来的email  与password
@@ -52,7 +56,7 @@ exports.login = async (req, res) => {
 
 }
 
-
+// 获取用户信息
 exports.getInfo = async (req, res) => {
     // 1. 获取用户 id，通过 req.auth
     const { userId } = req.auth;
@@ -68,7 +72,7 @@ exports.getInfo = async (req, res) => {
 };
 
 
-
+// 修改用户信息
 exports.update = async (req, res) => {
     // 1. 获取用户Id
     const { userId } = req.auth;
@@ -92,6 +96,33 @@ exports.update = async (req, res) => {
     // 3. 修改数据库
     await UserModel.updateOne({ _id: userId }, updateData);
     const data = await UserModel.findOne({ _id: userId }, { password: 0 });
+    // 4. 响应给前端
+    res.send({
+      code: 0,
+      msg: "修改成功",
+      data
+    });
+  };
+
+
+
+//修改用户密码
+exports.updatePassword = async (req, res) => {
+    // 1. 获取用户Id
+    const { userId } = req.auth;
+    var {password,newpassword}=req.body  
+    // 3. 修改数据库
+    const data = await UserModel.findOne({ _id: userId }); 
+    // 校验密码是否正确 bcryptjs
+    if (!data.comparePassword(password)) {
+        // 校验不通过
+        res.send({ code: -1, msg: '密码不正确' })
+        return
+    }
+    //先加密
+    newpasswordn=bcryptjs.hashSync(newpassword,10)  
+    //再把加密的密码存入数据库
+    await UserModel.updateOne({ _id: userId },{password:newpasswordn})
     // 4. 响应给前端
     res.send({
       code: 0,
