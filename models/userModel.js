@@ -35,6 +35,13 @@ var userSchema = new mongoose.Schema(
         nickname: {
             type: String,  
             default: ''
+        },
+        /**
+         * 用户头像信息，一个完整的url地址
+         */
+        avatar:{
+            type:String,
+            default:'http://localhost:3001/assets/images/kongbai.png'
         }
 
     },  

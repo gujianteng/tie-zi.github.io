@@ -13,7 +13,15 @@ $(function () {
                     window.location.href = './index.html'
                 } else {
                     alert(res.msg)
+                    return
                 }
+
+                // 登录成功
+                // 1. 将 token 信息写入到 Cookie 中
+                // 2. 跳转到首页帖子列表页
+                Cookies.set("token", res.token);
+
+                window.location.href = "/post/index.html";
             }
         })
     })

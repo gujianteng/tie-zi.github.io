@@ -1,44 +1,40 @@
 
 // 删除功能
-$(function(){
-
-
-        // 获取当前帖子ID
-        var href=window.location.href
-        var str=href.split("?")[1]  
-        // 判断 str 是否存在
-        if(!str){
-            alert("请注意是否携带有id")
-            return
+// $(function () {
+    $(".container").on('click', '#post-remove', function () {
+        // 判断是否有登录
+        if (!isLogined()) {
+            // 没有登录
+            alert("请登录");
+            window.location.href = "/login.html";
+            return;
         }
-        var arr=str.split("&")
-        var result={}
-        arr.forEach(item=>{
-            var tmp=item.split("=")
-            result[tmp[0]]=tmp[1]
-        })
-    
-        // console.log(result.id);
-    
-    
-        // 发送ajax请求获取详情数据
-    
-        var url=`http://localhost:3001/posts/${result.id}`
-        $(".container").on('click','#post-remove',function(){
-            $.ajax({
-                url,
-                type:'delete',
-                success:function(res){
-                    if(res.code===0){
-                        window.location.href="./index.html"
-                    }else{
-                        console.log(res);
-                    }
+
+        // 二次确认是否删除呢
+        if (!confirm("你确认要删除么？")) {
+            // 点击取消，那就不删除
+            return;
+        }
+
+        let url = `/posts/${herfId}`;
+        $.ajax({
+            url,
+            type: "delete",
+            headers: {
+                Authorization: Cookies.get("token")
+            },
+            success: function (res) {
+                if (res.code === 0) {
+                    alert("删除成功");
+                    window.location.href = "./index.html";
+                } else {
+                    console.log(res);
                 }
-            })
-        })
+            }
+        });
+    })
 
 
 
 
-})
+// })

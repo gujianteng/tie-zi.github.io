@@ -35,13 +35,13 @@ $(function () {
                 totalPage = res.date.totalPage
                 var pageHtml = ""
                 // 上一页
-                pageHtml += `<li class="page-item"  data-page="${pageNum > 1 ? pageNum - 1 : 1}"><a class="page-link" href="javascript:;">Prev</a></li>`
+                pageHtml += `<li class="page-item"  data-page="${pageNum > 1 ? pageNum - 1 : 1}"><a class="page-link" href="javascript:;">上一页</a></li>`
                 // 循环计算出页码 totalPage 是个数字
                 for (var i = 0; i < totalPage; i++) {
                     pageHtml += `<li data-page="${i + 1}" class="page-item ${i + 1 == pageNum ? "active" : ""}"><a class="page-link" href="javascript:;">${i + 1}</a></li>`
                 }
                 // 下一页
-                pageHtml += `<li class="page-item"  data-page="${pageNum < totalPage ? pageNum + 1 : totalPage}"><a class="page-link" href="javascript:;">Next</a></li>`
+                pageHtml += `<li class="page-item"  data-page="${pageNum < totalPage ? pageNum + 1 : totalPage}"><a class="page-link" href="javascript:;">下一页</a></li>`
                 // 写入页面中
                 $(".pagination").html(pageHtml)
             }

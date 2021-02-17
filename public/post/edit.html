@@ -28,8 +28,8 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav">
-        <li class="nav-item">
+      <ul  id="navbar-nav-right" class="navbar-nav">
+        <!-- <li class="nav-item">
           <a href="./release.html" class="nav-link">
             <i class="fas fa-plus">发布</i>
           </a>
@@ -45,7 +45,7 @@
             <div class="dropdown-divider"></div>
             <button class="dropdown-item" type="submit">Logout</button>
           </div>
-        </li>
+        </li> -->
       </ul>
     </div>
   </nav>
@@ -53,15 +53,15 @@
   <div class="container my-5">
     <h1 class="mb-5">编辑帖子</h1>
 
-    <form action="javascript:;" method="POST">
+    <form id="form-edit" action="javascript:;" method="POST">
       <div class="form-group">
         <label for="title">标题</label>
-        <input id="form-title" type="text" class="form-control" name="title" placeholder="请输入标题" value="At here waiting for you" />
+        <input id="form-title" type="text" class="form-control" name="title" placeholder="请输入标题"  />
       </div>
 
       <div class="form-group">
         <label for="content">正文</label>
-        <textarea id="form-content" class="form-control" name="content" rows="8" cols="80" placeholder="请输入正文">在这里等着你</textarea>
+        <textarea id="form-content" class="form-control" name="content" rows="8" cols="80" placeholder="请输入正文"></textarea>
       </div>
 
       <div class="form-group d-flex justify-content-end">
@@ -74,7 +74,8 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
   <!-- <script src="/lib/moment.min.js"></script> -->
-
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+  <script src="/assets/js/common.js"></script>
   <script src="/assets/js/post_edit.js"></script>
 </body>
 

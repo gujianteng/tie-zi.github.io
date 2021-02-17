@@ -41,33 +41,16 @@ exports.index = async (req, res) => {
 
 // 发布帖子
 exports.create = async (req, res) => {
-    //获取请求头中的token
-    var token = req.get('Authorization')  //一般存在请求头的Authorization里面
-    // 发布帖子之前校验一下token是否有效
-    if (token) {
-        // 存在还要去校验token是否有效
-        jsonwebtoken.verify(token, "gujianteng", async (err, date) => {
-            if (err) {
-                //校验失败
-                res.status(401).send('身份验证失败')
-            } else {
-                // 校验成功，再去做你后续的操作
-
-                //  获取前端传递过来的参数
-                var { title, content } = req.body
-                //  使用 async await  创建帖子
-                await PostModel.create({ title, content })
-                // 成功
-                res.send({ code: 0, msg: "成功" })
-            }
-        })
-    } else {
-        // 不存在
-        res.status(401).send('请携带token')
-    }
-
-
-}
+    // const { title, content, userId } = req.body;
+    // await PostModel.create({ title, content, userId });
+  
+    // 获取出 req.auth 中的 userId
+    const { userId } = req.auth;
+    req.body.userId = userId;
+  
+    await PostModel.create(req.body);
+    res.send({ code: 0, msg: "成功" });
+  };
 
 // 编辑更新帖子
 exports.update = async (req, res) => {

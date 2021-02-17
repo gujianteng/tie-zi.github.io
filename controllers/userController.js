@@ -1,84 +1,101 @@
 //引入userModel
-// var UserModel=require('../models/userModel')
-// //引入已经下载好的加密工具 bcryptjs
-// // var bcryptjs=require('bcryptjs')
-
 const UserModel = require("../models/userModel")
+const fs = require("fs");
+const path = require("path");
 //使用token先要引入jsonwebtoken
-var jsonwebtoken=require('jsonwebtoken')
-
-// exports.register= async(req,res)=>{
-//     // 要获取前端传递过来的用户信息 body
-
-//     //第一种
-//     // var {email,password,nickname}=req.body
-//     //把前端传过来的数据写入数据库中
-//     //把前端传过来的密码加密
-//     // 1.await UserModel.create(
-//     //     Object.assign({},req.body,{
-//     //         password:bcryptjs.hashSync(req.body.password,10)
-//     //     })
-//     // )
-//     //第二种：去userSchema文件里面提供一个钩子函数，实现加密功能
-//     await UserModel.create(req.body)
-//     //响应
-//     res.send({
-//         code:0,
-//         msg:'注册成功'  
-//     })
-
-// }
-
-
-
-exports.register=async (req,res)=>{
+var jsonwebtoken = require('jsonwebtoken')
+exports.register = async (req, res) => {
     // 获取email
-    var {email} = req.body
+    var { email } = req.body
     // 判断是否已经注册过，做一个查询操作
-    var date=await UserModel.findOne({email})
-    if(date){
+    var date = await UserModel.findOne({ email })
+    if (date) {
         // 存在，不允许注册
-        res.send({code:-1,msg:'该邮箱已注册'})
-    }else{
+        res.send({ code: -1, msg: '该邮箱已注册' })
+    } else {
         //不存在，允许注册
         await UserModel.create(req.body)
-        res.send({code:0,msg:'注册成功'})
+        res.send({ code: 0, msg: '注册成功' })
     }
 }
 
-exports.login= async(req,res)=>{
+exports.login = async (req, res) => {
     // res.send('用户登入')
     //获取前端传递过来的email  与password
-    var {email,password}=req.body
+    var { email, password } = req.body
     // 根据Email 去查询数据库
-    var date=await UserModel.findOne({email})
+    var date = await UserModel.findOne({ email })
     // 判断 date是否有值
-    if(!date){
-        res.send({code:-1,msg:'邮箱不正确'})
+    if (!date) {
+        res.send({ code: -1, msg: '邮箱不正确' })
         return
     }
-
     // 校验密码是否正确 bcryptjs
-    if(!date.comparePassword(password)){
+    if (!date.comparePassword(password)) {
         // 校验不通过
-        res.send({code:-1,msg:'密码不正确'})
+        res.send({ code: -1, msg: '密码不正确' })
         return
     }
-
-
     //登入之前生成一个token给前端
-
-    var token=jsonwebtoken.sign(
+    var token = jsonwebtoken.sign(
         {
-            userId:date._id,
-            nickname:date.nickname
+            userId: date._id,
+            nickname: date.nickname
         },
         "gujianteng",     //定义一个密钥
         {
-            expiresIn:'2h'    //设置过期时间
+            expiresIn: '2h'    //设置过期时间
         }
     )
-    res.send({code:0,msg:'登入成功',token})
+    res.send({ code: 0, msg: '登入成功', token })
 
 
-} 
+}
+
+
+exports.getInfo = async (req, res) => {
+    // 1. 获取用户 id，通过 req.auth
+    const { userId } = req.auth;
+    // 2. 查询数据库即可
+    // { passwod: 0 } 是讲 password 字段在返回中剔除掉
+    const data = await UserModel.findOne({ _id: userId }, { password: 0 });
+    // 3. 响应
+    res.send({
+        code: 0,
+        msg: "OK",
+        data
+    });
+};
+
+
+
+exports.update = async (req, res) => {
+    // 1. 获取用户Id
+    const { userId } = req.auth;
+    // 定义一个后续有来修改的对象
+    let updateData = {};
+    // 2. 判断是否有传递头像过来
+    if (req.file.path) {
+      // 2.1 定义 newFilename 与 newFilepath
+      const newFilename = `${req.file.filename}-${req.file.originalname}`;
+      const newFilepath = path.resolve(__dirname, "../public", newFilename);
+  
+      // 2.2 读文件
+      const fileData = fs.readFileSync(req.file.path);
+  
+      // 2.3 写文件
+      fs.writeFileSync(newFilepath, fileData);
+  
+      // 2.4 给 updateData 中设置 avatar
+      updateData.avatar = `http://localhost:3001/${newFilename}`;
+    }
+    // 3. 修改数据库
+    await UserModel.updateOne({ _id: userId }, updateData);
+    const data = await UserModel.findOne({ _id: userId }, { password: 0 });
+    // 4. 响应给前端
+    res.send({
+      code: 0,
+      msg: "修改成功",
+      data
+    });
+  };

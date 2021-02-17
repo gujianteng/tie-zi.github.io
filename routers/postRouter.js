@@ -4,11 +4,6 @@ var express =require('express')
 // 生成express.Router的实例
 var router=express.Router()
 // 引入controllers 文件，结构赋值的方式拿出里面的方法
-
-
-
-
-
 const { 
     index,
     create,
@@ -17,7 +12,8 @@ const {
     show
  } = require('../controllers/postController')
 // 定义帖子相关的路由
-
+// 引入 auth 中间件
+const auth = require("../middlewares/auth");
 
 /**
  * @api {get} http://localhost:3001/posts     查询帖子与搜索
@@ -49,7 +45,7 @@ router.get("/",index)
  * @apiSuccess {String} msg   错误/成功 信息.
  */
 //发布帖子  POST  /posts
-router.post('/',create)
+router.post('/',auth,create)
 
 
 /**
@@ -65,7 +61,7 @@ router.post('/',create)
  * 
  */
 //更新帖子  PUT   /posts/:id
-router.put('/:id',update)
+router.put('/:id',auth,update)
 
 
 
@@ -77,7 +73,7 @@ router.put('/:id',update)
  * @apiSuccess {String} msg   错误/成功 信息.
  */
 //删除帖子  DELETE   /posts/:id
-router.delete('/:id',remove)
+router.delete('/:id',auth,remove)
 
 
 /**
