@@ -20,10 +20,10 @@ $( function () {
                     
                     html += `<li class="list-group-item flex-column align-items-start py-3">
                     <div class="d-flex justify-content-between">
-                      <a class="text-dark w-75" href="./show.html?id=${item._id}">
+                      <a id="dianai" class="text-dark w-75" href="./show.html?id=${item._id}">
                         <h4>${item.title}</h4>
                       </a>
-                      <small class="text-black-50 text-right">${moment(item.updatedAt).format("YYYY-MM-DD hh:mm:ss")}</small>
+                      <small class="text-black-50 text-right">作者：${item.author}--${moment(item.updatedAt).format("YYYY-MM-DD hh:mm:ss")}</small>
                     </div>
                     <div class="font-weight-light text-truncate">${item.content}</div>
                   </li>`
@@ -57,7 +57,7 @@ $( function () {
         pageNum = toPage 
         getDate()
     }) 
-
+ 
     // 模糊搜索
     $('#searchBtn').click(function(){
         // 获取关键字

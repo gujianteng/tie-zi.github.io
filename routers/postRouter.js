@@ -39,8 +39,11 @@ router.get("/",index)
  * @apiName create
  * @apiGroup post
  * 
- * @apiParam {String} title  帖子标题
- * @apiParam {String} content  帖子内容
+ * @apiParam (body) {String} title  帖子标题
+ * @apiParam (body) {String} content  帖子内容
+ * @apiParam (body) {String} author  帖子作者
+ * 
+ * 
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.
  */
@@ -52,8 +55,10 @@ router.post('/',auth,create)
  * @api {put} http://localhost:3001/posts/:id     编辑更新帖子
  * @apiName update
  * @apiGroup post
- * @apiParam {String} title  帖子标题
- * @apiParam {String} content  帖子内容
+ * @apiParam (body) {String} title  帖子标题
+ * @apiParam (body)  {String} content  帖子内容
+ * 
+ * 
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.
  * @apiSuccess {String} data  更新之后的帖子信息.
@@ -79,12 +84,23 @@ router.delete('/:id',auth,remove)
 /**
  * @api {get} http://localhost:3001/posts/:id     帖子详情/编辑回填数据
  * @apiGroup post
+ * 
+ * 
+ * @apiParam (body) {String} author 作者
+ * 
  * @apiSuccess {Number} code 错误/成功 状态码.
  * @apiSuccess {String} msg   错误/成功 信息.
  * @apiSuccess {String} data  帖子详情（数据库单条数据）.
  * 
  */
 //帖子详情  get   /posts/:id
-router.get('/:id',show)
+router.get('/:id',show) 
+
+
+
+
+
+
+
 
 module.exports=router

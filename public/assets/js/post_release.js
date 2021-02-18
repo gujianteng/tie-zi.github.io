@@ -1,7 +1,6 @@
 // 发布帖子
 
-
-$(async function () {
+$(function () {
     // 判断是否有登录，没有登录需要去登录页面
     // 使用写在 common.js 中的判断方法
     needLogin();
@@ -12,6 +11,7 @@ $(async function () {
             alert('帖子标题或内容不能为空')
             return
         }
+
         $.ajax({
             url: `http://localhost:3001/posts`,
             type: "POST",

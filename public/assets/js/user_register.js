@@ -6,7 +6,8 @@ $(function () {
             type: 'POST',
             data: {
                 email: $("#register-username").val(),
-                password: $("#register-password").val()
+                password: $("#register-password").val(),
+                nickname:$('#register-name').val()
             },
             success: function (res) {
                 if (res.code === 0) {

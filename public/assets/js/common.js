@@ -33,8 +33,6 @@ function needLogin() {
   if (!isLogined()) {
     // 没有登录
     // $('#editBtn').
-
-    
     alert("需要登录哦亲~");
     window.location.href = "/login.html";
   }
@@ -73,9 +71,10 @@ async function renderNavbar() {
 
     // 获取用户的基本信息，这个操作可能在前端会多次使用，所以不要再这里直接写死，而是去抽离一个公共方法
     const res = await getUserInfo();
-
+console.log(res);
     // 渲染
     html = `
+    <li style="line-height:46px;margin-right:200px">欢迎你：${res.data.nickname}</li>
     <li class="nav-item">
       <a href="/post/release.html" class="nav-link">
         <i class="fas fa-plus">发布</i>
@@ -108,9 +107,9 @@ async function renderNavbar() {
         <img src="/assets/images/kongbai.png" class="rounded" width="30" height="30" alt="" />
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="http://localhost:3001/login.html">登陆</a>
         <a class="dropdown-item" href="/user/settings/profile/edit.html">更换头像</a>
         <a class="dropdown-item" href="/user/settings/password/edit.html">修改密码</a>
+        <a class="dropdown-item" href="http://localhost:3001/login.html">登陆</a>
         <div class="dropdown-divider"></div>
       </div>
     </li>

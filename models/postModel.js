@@ -17,7 +17,11 @@ var postSchema = new mongoose.Schema(
          */
 
         title: { type: String, required: true },
-        content: { type: String}
+        content: { type: String},
+        author:{
+            type:String,
+            default:"匿名"
+        }
     },
     {
         // timestamps: true, 设置这个后，在数据库会多出两个时间，createAt    updateAt

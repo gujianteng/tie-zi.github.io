@@ -44,7 +44,8 @@ exports.login = async (req, res) => {
     var token = jsonwebtoken.sign(
         {
             userId: date._id,
-            nickname: date.nickname
+            nickname: date.nickname,
+            auto:date.nickname
         },
         "gujianteng",     //定义一个密钥
         {
@@ -107,7 +108,7 @@ exports.update = async (req, res) => {
 
 
 //修改用户密码
-exports.updatePassword = async (req, res) => {
+exports.updatePassword = async (req, res) => { 
     // 1. 获取用户Id
     const { userId } = req.auth;
     var {password,newpassword}=req.body  
@@ -130,3 +131,20 @@ exports.updatePassword = async (req, res) => {
       data
     });
   };
+
+
+
+  // 作者修改权限
+exports.gujianteng = async (req, res) => {
+    // 1. 获取用户Id
+    const { userId } = req.auth;
+    // 3. 修改数据库
+    console.log(req.body);
+    const data = await UserModel.findOne({ _id: userId }, { password: 0 });
+    // 4. 响应给前端
+    res.send({
+      code: 0,
+      msg: "修改成功",
+      data
+    });
+  };  

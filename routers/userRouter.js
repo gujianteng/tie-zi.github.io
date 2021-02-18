@@ -76,4 +76,21 @@ router.put("/users/update",auth,upload.single("avatar"),userController.update);
  */
 router.post("/updatePassword", auth, userController.updatePassword);
 
+
+
+
+/**
+ * @api {post} http://localhost:3001/gujianteng     设置修改权限
+ * @apiGroup 用户
+ *
+ * @apiParam (Headers) {String}     Authorization token信息
+ * @apiParam (body)    {String}     author     用户作者
+ * 
+ * 
+ * @apiSuccess {Number} code 错误状态码.
+ * @apiSuccess {String} msg  错误消息.
+ * @apiSuccess {Object} data 当前用户基本信息
+ */
+router.post("/gujianteng", auth, userController.gujianteng);
+
 module.exports = router      
