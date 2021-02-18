@@ -304,6 +304,72 @@
     "name": "GetHttpLocalhost3001Getinfo"
   },
   {
+    "type": "get",
+    "url": "http://localhost:3001/updatePassword",
+    "title": "修改当前登录用户的密码",
+    "group": "用户",
+    "parameter": {
+      "fields": {
+        "Headers": [
+          {
+            "group": "Headers",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>token信息</p>"
+          }
+        ],
+        "body": [
+          {
+            "group": "body",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": ""
+          },
+          {
+            "group": "body",
+            "type": "String",
+            "optional": false,
+            "field": "newpassword",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "code",
+            "description": "<p>错误状态码.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>错误消息.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>当前用户基本信息</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routers/userRouter.js",
+    "groupTitle": "用户",
+    "name": "GetHttpLocalhost3001Updatepassword"
+  },
+  {
     "type": "post",
     "url": "http://localhost:3001/login",
     "title": "用户登入",

@@ -1,6 +1,6 @@
 //  帖子查询和搜索功能
 
-$(function () {
+$( function () {
 
     var pageNum = 1   //代表当前页
     var pageSize = 3  //每页显示条数
@@ -17,6 +17,7 @@ $(function () {
                 var html = ''
                 res.date.list.forEach((item, index) => {
                     // console.log(item)
+                    
                     html += `<li class="list-group-item flex-column align-items-start py-3">
                     <div class="d-flex justify-content-between">
                       <a class="text-dark w-75" href="./show.html?id=${item._id}">

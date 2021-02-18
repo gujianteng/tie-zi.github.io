@@ -1,4 +1,4 @@
-// 用户注册
+// 用户注登入
 $(function () {
     $('#user-login').click(() => {
         $.ajax({

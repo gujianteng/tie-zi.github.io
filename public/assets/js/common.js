@@ -108,9 +108,9 @@ async function renderNavbar() {
         <img src="/assets/images/kongbai.png" class="rounded" width="30" height="30" alt="" />
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="http://localhost:3001/login.html">登入</a>
-        <a class="dropdown-item" href="/user/settings/profile/edit.html">Profile</a>
-        <a class="dropdown-item" href="/user/settings/password/edit.html">Settings</a>
+        <a class="dropdown-item" href="http://localhost:3001/login.html">登陆</a>
+        <a class="dropdown-item" href="/user/settings/profile/edit.html">更换头像</a>
+        <a class="dropdown-item" href="/user/settings/password/edit.html">修改密码</a>
         <div class="dropdown-divider"></div>
       </div>
     </li>
