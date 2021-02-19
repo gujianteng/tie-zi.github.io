@@ -92,12 +92,12 @@ exports.update = async (req, res) => {
       fs.writeFileSync(newFilepath, fileData);
   
       // 2.4 给 updateData 中设置 avatar
-      updateData.avatar = `http://localhost:3001/${newFilename}`;
+      updateData.avatar = `http://localhost:3001/${newFilename}`;  
     }
     // 3. 修改数据库
     await UserModel.updateOne({ _id: userId }, updateData);
     const data = await UserModel.findOne({ _id: userId }, { password: 0 });
-    // 4. 响应给前端
+    // 4. 响应给前端 
     res.send({
       code: 0,
       msg: "修改成功",

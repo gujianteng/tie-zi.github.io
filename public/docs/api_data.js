@@ -4,6 +4,19 @@ define({ "api": [
     "url": "http://localhost:3001/posts/:id",
     "title": "帖子详情/编辑回填数据",
     "group": "post",
+    "parameter": {
+      "fields": {
+        "body": [
+          {
+            "group": "body",
+            "type": "String",
+            "optional": false,
+            "field": "author",
+            "description": "<p>作者</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -44,20 +57,27 @@ define({ "api": [
     "group": "post",
     "parameter": {
       "fields": {
-        "Parameter": [
+        "body": [
           {
-            "group": "Parameter",
+            "group": "body",
             "type": "String",
             "optional": false,
             "field": "title",
             "description": "<p>帖子标题</p>"
           },
           {
-            "group": "Parameter",
+            "group": "body",
             "type": "String",
             "optional": false,
             "field": "content",
             "description": "<p>帖子内容</p>"
+          },
+          {
+            "group": "body",
+            "type": "String",
+            "optional": false,
+            "field": "author",
+            "description": "<p>帖子作者</p>"
           }
         ]
       }
@@ -204,16 +224,16 @@ define({ "api": [
     "group": "post",
     "parameter": {
       "fields": {
-        "Parameter": [
+        "body": [
           {
-            "group": "Parameter",
+            "group": "body",
             "type": "String",
             "optional": false,
             "field": "title",
             "description": "<p>帖子标题</p>"
           },
           {
-            "group": "Parameter",
+            "group": "body",
             "type": "String",
             "optional": false,
             "field": "content",
@@ -368,6 +388,65 @@ define({ "api": [
     "filename": "routers/userRouter.js",
     "groupTitle": "用户",
     "name": "GetHttpLocalhost3001Updatepassword"
+  },
+  {
+    "type": "post",
+    "url": "http://localhost:3001/gujianteng",
+    "title": "设置修改权限",
+    "group": "用户",
+    "parameter": {
+      "fields": {
+        "Headers": [
+          {
+            "group": "Headers",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>token信息</p>"
+          }
+        ],
+        "body": [
+          {
+            "group": "body",
+            "type": "String",
+            "optional": false,
+            "field": "author",
+            "description": "<p>用户作者</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "code",
+            "description": "<p>错误状态码.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>错误消息.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>当前用户基本信息</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routers/userRouter.js",
+    "groupTitle": "用户",
+    "name": "PostHttpLocalhost3001Gujianteng"
   },
   {
     "type": "post",

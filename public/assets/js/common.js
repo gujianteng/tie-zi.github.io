@@ -80,7 +80,6 @@ console.log(res);
         <i class="fas fa-plus">发布</i>
       </a>
     </li>
-
     <li class="nav-item dropdown">
       <a href="javascript:;" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
         <img src="${res.data.avatar}" class="rounded" width="30" height="30" alt="" />
@@ -92,6 +91,8 @@ console.log(res);
         <button id="logout-btn" class="dropdown-item" type="submit">退出</button>
       </div>
     </li>
+    <li style="line-height:46px">已登入</li>
+
     `;
   } else {
     // 不存在
@@ -113,6 +114,8 @@ console.log(res);
         <div class="dropdown-divider"></div>
       </div>
     </li>
+    <li style="line-height:46px">请登入</li>
+
     `;
   }
   $("#navbar-nav-right").html(html);
