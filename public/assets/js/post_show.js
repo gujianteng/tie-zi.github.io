@@ -22,7 +22,7 @@ let herfId = getHerfId(window.location.href);
 
 // 发送ajax请求获取详情数据
 
-var url = `http://localhost:3001/posts/${herfId}`
+var url = `/posts/${herfId}`
 
 // needLogin();
 
@@ -50,7 +50,7 @@ $.get(url, function (res) {
     $('#post-edit').on('click', function () {
 
       $.ajax({
-        url: `http://localhost:3001/gujianteng`,
+        url: `/gujianteng`,
         type: 'post',
         data: {
           author: $('#emailgu').text() 

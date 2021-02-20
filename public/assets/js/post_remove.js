@@ -4,7 +4,7 @@
 $(".container").on('click', '#post-remove', function () {
 
     $.ajax({
-        url: `http://localhost:3001/gujianteng`,
+        url: `/gujianteng`,
         type: 'post',
         data: {
             author: $('#emailgu').text()

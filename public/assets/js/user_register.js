@@ -2,7 +2,7 @@
 $(function () {
     $('#user-register').click(() => {
         $.ajax({
-            url: `http://localhost:3001/register`,
+            url: `/register`,
             type: 'POST',
             data: {
                 email: $("#register-username").val(),

@@ -13,7 +13,7 @@ $(function () {
         }
 
         $.ajax({
-            url: `http://localhost:3001/posts`,
+            url: `/posts`,
             type: "POST",
             data: {
                 title: $("#form-title").val(),

@@ -12,7 +12,7 @@ $('#update-password').on('click', function () {
    var newpassword=$('#my-newpassword').val() 
    console.log(password);
     $.ajax({
-        url: "http://localhost:3001/updatePassword",
+        url: "/updatePassword",
         type: "post",
         dataType: "json",
         contentType: "application/json;charset=utf-8",

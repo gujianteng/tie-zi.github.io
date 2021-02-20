@@ -8,7 +8,7 @@ $( function () {
     var searchTitle='' // 标题搜索关键字
 
     function getDate() {
-        $.get('http://localhost:3001/posts', {
+        $.get('/posts', {
             pageNum: pageNum,
             pageSize: pageSize,
             title:searchTitle

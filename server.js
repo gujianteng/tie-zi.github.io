@@ -1,4 +1,6 @@
 var express = require('express')
+//引入 dotenv 并配置
+require("dotenv").config()
 // 引入统一处理错误的包,不需要拿变量来接收
 require('express-async-errors')
 var app = express()
@@ -34,6 +36,6 @@ app.use((err, req, res, next) => {
 })
 
 
-app.listen(3001, function () {
+app.listen(4000, function () {
   console.log('服务启动成功');
 })

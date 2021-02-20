@@ -41,7 +41,7 @@ var userSchema = new mongoose.Schema(
          */
         avatar:{
             type:String,
-            default:'http://localhost:3001/assets/images/kongbai.png'
+            default:`${process.env.BASEURL}/assets/images/kongbai.png`
         }
 
     },  
