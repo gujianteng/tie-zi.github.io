@@ -31,13 +31,13 @@ exports.login = async (req, res) => {
     var date = await UserModel.findOne({ email })
     // 判断 date是否有值
     if (!date) {
-        res.send({ code: -1, msg: '邮箱不正确' })
+        res.send({ code: -1, msg: '邮箱或密码不正确' })
         return
     }
     // 校验密码是否正确 bcryptjs
     if (!date.comparePassword(password)) {
         // 校验不通过
-        res.send({ code: -1, msg: '密码不正确' })
+        res.send({ code: -1, msg: '邮箱或密码不正确' })
         return
     }
     //登入之前生成一个token给前端
